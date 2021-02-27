@@ -5,6 +5,7 @@ const total_cases_element = document.querySelector(".th-5 .value");
 const recovered_element = document.querySelector(".th-2 .value");
 
 const deaths_element = document.querySelector(".th-3 .value");
+const test_done_element = document.querySelector(".th-4 .value");
 // const country_element = document.querySelector(".th-6 .value");
 
 const world_confirmed_element= document.querySelector(".side-table-1 .value");
@@ -21,6 +22,7 @@ let app_data = [],
   recovered_list = [],
   deaths_list = [],
   deaths = [],
+  test_done_list= [],
   formatedDates = [],
   world_confirmed_data,
   world_recovered_data,
@@ -113,24 +115,24 @@ function fetch_top_ten_countries(){
   console.log(top_ten_country_names);
   console.log(top_ten_country_cases);
 
-  // for(i=1; i<=10;++i){
-  //   const flag_element = document.getElementById("td-"+i+"-flag");
-  //   const country_name_element = document.getElementById("td-"+i+"-country-name");
-  //   const country_cases_element = document.getElementById("td-"+i+"-country-cases");
-  //   // console.log(element);
-  //   // const td_8_flag_element = document.getElementById("td-8-flag");
-  //   // const td_8_country_name_element = document.getElementById("td-8-country-name");
-  //   // const td_8_country_cases_element = document.getElementById("td-8-country-cases");
+  for(i=1; i<=10;++i){
+    const flag_element = document.getElementById("td-"+i+"-flag");
+    const country_name_element = document.getElementById("td-"+i+"-country-name");
+    const country_cases_element = document.getElementById("td-"+i+"-country-cases");
+    // console.log(element);
+    // const td_8_flag_element = document.getElementById("td-8-flag");
+    // const td_8_country_name_element = document.getElementById("td-8-country-name");
+    // const td_8_country_cases_element = document.getElementById("td-8-country-cases");
 
-  //   flag_code = flag_codes[i-1];
-  //   // console.log(flag_code);
-  //   flag_element.innerHTML += `<img class="flags" src="https://www.countryflags.io/${flag_code}/flat/64.png">`;
-  //   // console.log(td_8_flag_element);
+    flag_code = flag_codes[i-1];
+    // console.log(flag_code);
+    flag_element.innerHTML += `<img class="flags" src="https://www.countryflags.io/${flag_code}/flat/64.png">`;
+    // console.log(td_8_flag_element);
 
-  //   country_name_element.innerHTML = top_ten_country_names[i-1];
-  //   // console.log(td_8_country_name_element);
-  //   country_cases_element.innerHTML = top_ten_country_cases[i-1];
-  // }
+    country_name_element.innerHTML = top_ten_country_names[i-1];
+    // console.log(td_8_country_name_element);
+    country_cases_element.innerHTML = top_ten_country_cases[i-1];
+  }
 }
 
 function fetchData(country) {
@@ -208,6 +210,7 @@ function fetchData(country) {
             return res.json();
           })
           .then((data) => {
+            test_done_list= data.tests;
             // console.log(data);
             // data.forEach((entry) => {
             //   dates.push(entry.Date);
@@ -263,6 +266,7 @@ function fetchData(country) {
     recovered_element.innerHTML = total_recovered;
     // new_recovered_element.innerHTML = `+${new_recovered_cases}`;
     deaths_element.innerHTML = total_deaths;
+    test_done_element.innerHTML = test_done_list;
     // new_deaths_element.innerHTML = `+${new_deaths_cases}`;
     active_element.innerHTML= total_cases- total_recovered;
     // console.log(country_element);
